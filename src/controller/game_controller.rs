@@ -1,20 +1,6 @@
-use crate::game_state::GameState;
+use crate::model::{Command, CommandExecutionError, GameState};
 use inquire::Select;
 use std::fmt;
-
-pub enum Command {
-    Flee,
-    Battle,
-    Buy(String),
-    Sell(String),
-    Equip(String),
-}
-
-pub enum CommandExecutionError {
-    EnemyNotFound,
-    ItemNotFound,
-    InsufficientFunds,
-}
 
 enum CommandParsingError {
     ShouldRetry,
@@ -93,11 +79,11 @@ impl CommandParser {
     }
 }
 
-pub struct Game {
+pub struct GameController {
     game_state: GameState,
 }
 
-impl Game {
+impl GameController {
     /// Produces Game with a new Game being displayed
     pub fn new() -> Self {
         Self {

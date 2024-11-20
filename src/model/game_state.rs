@@ -1,11 +1,24 @@
-use crate::action_summary::{
+use crate::model::Encounter;
+use crate::model::Enemy;
+use crate::model::Player;
+use crate::model::{
     ActionSummary, BattleSummary, EquippingSummary, EscapeSummary, PurchaseSummary, SaleSummary,
 };
-use crate::encounter::Encounter;
-use crate::enemy::Enemy;
-use crate::game::{Command, CommandExecutionError};
-use crate::player::Player;
 use std::fmt;
+
+pub enum Command {
+    Flee,
+    Battle,
+    Buy(String),
+    Sell(String),
+    Equip(String),
+}
+
+pub enum CommandExecutionError {
+    EnemyNotFound,
+    ItemNotFound,
+    InsufficientFunds,
+}
 
 #[derive(Debug)]
 pub struct GameState {

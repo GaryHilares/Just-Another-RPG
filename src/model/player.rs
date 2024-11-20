@@ -1,5 +1,5 @@
-use crate::encounter::ShopListing;
-use crate::item::{Armor, Item, Weapon};
+use crate::model::ShopListing;
+use crate::model::{Armor, Item, Weapon};
 use rand::{self, Rng};
 
 #[derive(Debug)]

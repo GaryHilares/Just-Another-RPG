@@ -1,14 +1,9 @@
-use crate::game::Game;
+use crate::controller::GameController;
 
-mod action_summary;
-mod encounter;
-mod enemy;
-mod game;
-mod game_state;
-mod item;
-mod player;
+mod controller;
+mod model;
 
 fn main() {
-    let mut game = Game::new();
+    let mut game = GameController::new();
     game.run();
 }

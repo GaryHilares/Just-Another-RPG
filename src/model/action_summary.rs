@@ -1,4 +1,4 @@
-use crate::item::Item;
+use crate::model::Item;
 use std::fmt;
 
 pub enum EscapeSummary {

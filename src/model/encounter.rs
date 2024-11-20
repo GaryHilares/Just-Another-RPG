@@ -1,5 +1,5 @@
-use crate::enemy::Enemy;
-use crate::item::{Armor, Item, Weapon};
+use crate::model::Enemy;
+use crate::model::{Armor, Item, Weapon};
 use rand::Rng;
 use std::fmt;
 
