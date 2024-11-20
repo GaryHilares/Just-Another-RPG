@@ -1,4 +1,3 @@
-use crate::model::Item;
 use std::fmt;
 
 pub enum EscapeSummary {
@@ -34,45 +33,45 @@ impl fmt::Display for BattleSummary {
     }
 }
 
-pub struct PurchaseSummary {
-    pub item_bought: Item,
+pub struct PurchaseSummary<'a> {
+    pub item_bought: &'a str,
 }
 
-impl fmt::Display for PurchaseSummary {
+impl<'a> fmt::Display for PurchaseSummary<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "You successfully bought {}!", self.item_bought.name())
+        write!(f, "You successfully bought {}!", self.item_bought)
     }
 }
 
-pub struct SaleSummary {
-    pub item_sold: Item,
+pub struct SaleSummary<'a> {
+    pub item_sold: &'a str,
 }
 
-impl fmt::Display for SaleSummary {
+impl<'a> fmt::Display for SaleSummary<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Successfully sold {}.", self.item_sold.name())
+        write!(f, "Successfully sold {}.", self.item_sold)
     }
 }
 
-pub struct EquippingSummary {
-    pub item_equipped: Item,
+pub struct EquippingSummary<'a> {
+    pub item_equipped: &'a str,
 }
 
-impl fmt::Display for EquippingSummary {
+impl<'a> fmt::Display for EquippingSummary<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Successfully equipped {}.", self.item_equipped.name())
+        write!(f, "Successfully equipped {}.", self.item_equipped)
     }
 }
 
-pub enum ActionSummary {
+pub enum ActionSummary<'a> {
     Fleed(EscapeSummary),
     Battled(BattleSummary),
-    Bought(PurchaseSummary),
-    Sold(SaleSummary),
-    Equipped(EquippingSummary),
+    Bought(PurchaseSummary<'a>),
+    Sold(SaleSummary<'a>),
+    Equipped(EquippingSummary<'a>),
 }
 
-impl fmt::Display for ActionSummary {
+impl<'a> fmt::Display for ActionSummary<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match &self {
             ActionSummary::Battled(battle_summary) => write!(f, "{}", battle_summary),

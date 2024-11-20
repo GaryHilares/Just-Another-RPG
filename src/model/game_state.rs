@@ -20,6 +20,20 @@ pub enum CommandExecutionError {
     InsufficientFunds,
 }
 
+impl fmt::Display for CommandExecutionError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            CommandExecutionError::EnemyNotFound => {
+                write!(f, "You swing your sword... but there's no enemy there!")
+            }
+            CommandExecutionError::ItemNotFound => {
+                write!(f, "That item was not found in the shop!")
+            }
+            CommandExecutionError::InsufficientFunds => write!(f, "You do not have enough gold!"),
+        }
+    }
+}
+
 #[derive(Debug)]
 pub struct GameState {
     room_number: u32,
@@ -105,7 +119,7 @@ impl GameState {
                 let bought = self.player.buy(shop_listing);
                 if bought {
                     Ok(PurchaseSummary {
-                        item_bought: shop_listing.item.clone(),
+                        item_bought: shop_listing.item.name(),
                     })
                 } else {
                     Err(CommandExecutionError::InsufficientFunds)

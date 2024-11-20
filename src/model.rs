@@ -10,6 +10,6 @@ pub use self::action_summary::{
 };
 pub use self::encounter::{Encounter, ShopListing};
 pub use self::enemy::Enemy;
-pub use self::game_state::{Command, CommandExecutionError, GameState};
+pub use self::game_state::{Command, GameState};
 pub use self::item::{Armor, Item, Weapon};
 pub use self::player::Player;

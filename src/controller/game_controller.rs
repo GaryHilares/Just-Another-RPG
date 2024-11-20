@@ -1,24 +1,9 @@
-use crate::model::{Command, CommandExecutionError, GameState};
+use crate::model::{Command, GameState};
 use inquire::Select;
-use std::fmt;
 
 enum CommandParsingError {
     ShouldRetry,
     ShouldExit,
-}
-
-impl fmt::Display for CommandExecutionError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            CommandExecutionError::EnemyNotFound => {
-                write!(f, "You swing your sword... but there's no enemy there!")
-            }
-            CommandExecutionError::ItemNotFound => {
-                write!(f, "That item was not found in the shop!")
-            }
-            CommandExecutionError::InsufficientFunds => write!(f, "You do not have enough gold!"),
-        }
-    }
 }
 
 struct CommandParser;
@@ -91,7 +76,9 @@ impl GameController {
         }
     }
 
-    /// Runs game
+    /// Runs the game that this GameController represents. This is a long
+    /// running operation that blocks the main thread. Uses stdin and stdout.
+    /// Mutates this by updating the value of the game state.
     pub fn run(&mut self) {
         loop {
             println!("{}", self.game_state);
